@@ -1,0 +1,53 @@
+---
+title: "Georgia 2024 Data"
+author: "EKB"
+date: "2024-11-24"
+output: html_document
+---
+
+### Load libraries
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+### Import data
+```{r}
+total_data = read_excel("final/total_ga_results_2024.xlsx", sheet="County Results")
+```
+
+### Clean up data
+```{r}
+# drop rows that don't correspond to presidential election 
+ga_2024 = total_data%>%filter(`Office Name`=="President of the US")
+
+# drop rows that don't correspond to harris, trump, or total votes
+ga_2024 = ga_2024%>%filter(`Ballot Name` %in% c("Total Votes","Donald J. Trump (Rep)","Kamala D. Harris (Dem)"))
+
+# add party column
+ga_2024 = ga_2024%>%
+  group_by(County) %>%
+  mutate(Party = ifelse(`Choice ID` == 2 & Total == max(Total[`Ballot Name` != "Total Votes"]), 
+                        "DEMOCRAT", 
+                        ifelse(`Choice ID` == 1 & Total == max(Total[`Ballot Name` != "Total Votes"]),
+                               "REPUBLICAN", 
+                               NA))) %>%
+  fill(Party, .direction = "downup") %>% # Fill Party for all rows in each county
+  ungroup()
+
+# add vote percentage column
+ga_2024 = ga_2024%>%
+  group_by(County) %>%
+  mutate(`Vote Percentage` = ifelse(Total == max(Total[`Ballot Name` != "Total Votes"]), 
+                                    Total/Total[`Ballot Name` == "Total Votes"], NA))%>%
+  ungroup()
+
+# drop extra rows and columns 
+ga_2024 = ga_2024%>%select(c(County,Party,`Vote Percentage`))%>%drop_na()
+```
+
+### export clean georgia data
+```{r}
+write.csv(ga_2024, "clean_ga_results_2024.csv")
+```
+
