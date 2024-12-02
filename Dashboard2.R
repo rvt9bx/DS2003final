@@ -18,6 +18,7 @@ colnames(data)[colnames(data) == 'Urban.Influence.Code.2013'] <- 'Urban_Influenc
 
 # UI
 ui <- fluidPage(
+ 
   titlePanel("US Voting Trends: Factors Influencing Turnout in 2020"),
   sidebarLayout(
     sidebarPanel(
@@ -35,7 +36,11 @@ ui <- fluidPage(
                   selected = "None") # Default size variable is "None"
     ),
     mainPanel(
-      plotlyOutput("scatterPlot")
+      plotlyOutput("scatterPlot"),
+      p("This app displays a scatterplot, which can be used to look at the correlation between several different variables in the data, including 
+        Income, Education, Voter Turnout, Unemployment, and Urban Influence. The plot displays county results by state, and the state of interest can be
+        selected on the left side menu. Each dot on the scatterplot also shows if the county was won by the Republican or Democratic
+        party in the 2020 Presidential Election.")
     )
   )
 )
