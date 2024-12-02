@@ -6,7 +6,6 @@ library(plotly)
 # Load your dataset and preprocess
 data <- read.csv("socioeconomic_voting.csv")
 data <- data[ , !names(data) %in% "FIPS"] # Remove the FIPS column
-data <- data[ , !names(data) %in% "Urban.Influence.Code.2013"] # Remove the FIPS column
 
 # Change Column Names
 colnames(data)[colnames(data) == 'County.Name'] <- 'County'
@@ -15,6 +14,7 @@ colnames(data)[colnames(data) == 'County.Median.Household.Income..2021.'] <- 'Me
 colnames(data)[colnames(data) == 'County.Income.Percentile.Within.State..2021.'] <- 'Income_Percentile'
 colnames(data)[colnames(data) == 'Bachelor.s.Degree.or.Higher.Percentage..2018.2022.'] <- 'College_Educated_Percent'
 colnames(data)[colnames(data) == 'Vote.Percentage'] <- 'Voter_Turnout_Percent'
+colnames(data)[colnames(data) == 'Urban.Influence.Code.2013'] <- 'Urban_Influence'
 
 # UI
 ui <- fluidPage(
@@ -66,7 +66,7 @@ server <- function(input, output) {
       geom_point(alpha = 0.9) + # Size controlled by aes
       scale_size_continuous(range = c(0.5, 3.5)) + # Pronounced size range
       scale_color_manual(values = c("REPUBLICAN" = "red", "DEMOCRAT" = "blue")) +
-      labs(title = "2020 Election Data by County",
+      labs(title = "2020 Election Data by State",
            x = input$xvar, y = input$yvar, size = input$sizevar, color = "Party") +
       theme_minimal()
     
