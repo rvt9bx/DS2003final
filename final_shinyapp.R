@@ -10,6 +10,7 @@ library(shinythemes)
 library(stringr)
 library(plotly)
 library(bslib)
+library(maps)
 
 # import data 
 vote = read.csv("socioeconomic_voting.csv") 
@@ -24,7 +25,7 @@ vote = vote%>%rename('County'='County.Name',
                      'Vote Percentage'='Vote.Percentage', 
                      'Urban Influence'='Urban.Influence.Code.2013', 
                      'County Income Percentile'='County.Income.Percentile.Within.State..2021.') 
-ga_2024 = ga_2024%>%rename('Vote Percentage'='Vote.Percentage')%>%select(-X)
+ga_2024 = ga_2024%>%rename('Majority Percentage'='Vote.Percentage')%>%select(-X)
 
 # subset georgia 
 ga_2020 = vote%>%filter(State=="GEORGIA")
@@ -41,7 +42,7 @@ ga_2024 = ga_2024%>%
                                           1,
                                           Party
                                    ))),
-         `Vote Percentage` = 100*`Vote Percentage`)
+         `Majority Percentage` = 100*`Majority Percentage`)
 ga_counties = ga_counties%>%
   mutate(County = str_to_title(County))
 ga_2020 = ga_2020%>%
@@ -82,7 +83,7 @@ ui = fluidPage(
       selectInput(
         "fillvar2024",
         "Select a variable for 2024 data:",
-        choices = c("Vote Percentage", "Party"
+        choices = c("Majority Percentage", "Party"
                     ),
         selected="Party"
       ),
@@ -92,10 +93,12 @@ ui = fluidPage(
         choices = unique(ga_counties$County)
         ),
       p("This dashboard provides the viewer with the ability to explore election 
-      results from 2024 and 2020, as well as socioeconomic trends from around 2020.  
-      When visualizing the 'Party' variable, 0 corresponds to majority Democratic 
-      and 1 corresponds to majority Republican. It is important to keep in mind that 
-      the 'Vote Percentage' variable represents the percent of votes that the winning party received, 
+      results from 2024 and 2020, as well as socioeconomic trends from around 2020. 
+      Use the check box to toggle between viewing all counties in Georgia and zooming to a specific county, 
+      chosen with the county dropdown. 
+      When visualizing the 'Party' variable, 0 (blue) corresponds to majority Democratic 
+      and 1 (red) corresponds to majority Republican. It is important to keep in mind that 
+      the 'Majority Percentage' variable in the 2024 data represents the percent of votes that the winning party received, 
       not the percent of the eligible population that voted."),
       tags$div(
         "Data sourced from ",
