@@ -25,7 +25,8 @@ vote = vote%>%rename('County'='County.Name',
                      'Vote Percentage'='Vote.Percentage', 
                      'Urban Influence'='Urban.Influence.Code.2013', 
                      'County Income Percentile'='County.Income.Percentile.Within.State..2021.') 
-ga_2024 = ga_2024%>%rename('Majority Percentage'='Vote.Percentage')%>%select(-X)
+ga_2024 = ga_2024%>%rename('Majority Percentage'='Vote.Percentage', 
+                           'Vote Percentage'='Turnout.Percentage')%>%select(-X)
 
 # subset georgia 
 ga_2020 = vote%>%filter(State=="GEORGIA")
@@ -83,7 +84,7 @@ ui = fluidPage(
       selectInput(
         "fillvar2024",
         "Select a variable for 2024 data:",
-        choices = c("Majority Percentage", "Party"
+        choices = c("Majority Percentage", "Party", "Vote Percentage"
                     ),
         selected="Party"
       ),
@@ -92,14 +93,14 @@ ui = fluidPage(
         "Select a county:",
         choices = unique(ga_counties$County)
         ),
-      p("This dashboard provides the viewer with the ability to explore election 
-      results from 2024 and 2020, as well as socioeconomic trends from around 2020. 
-      Use the check box to toggle between viewing all counties in Georgia and zooming to a specific county, 
+      tags$b("This dashboard provides the viewer with the ability to explore election 
+      results from 2024 and 2020, as well as socioeconomic trends from around 2020."),
+      p("Use the check box to toggle between viewing all counties in Georgia and zooming to a specific county, 
       chosen with the county dropdown. 
       When visualizing the 'Party' variable, 0 (blue) corresponds to majority Democratic 
       and 1 (red) corresponds to majority Republican. It is important to keep in mind that 
-      the 'Majority Percentage' variable in the 2024 data represents the percent of votes that the winning party received, 
-      not the percent of the eligible population that voted."),
+      the 'Majority Percentage' variable in the 2024 data represents the percent of votes that the winning party received,
+      while 'Vote Percentage' in both 2020 and 2024 represents the turnout, or the percent of the eligible population that voted."),
       tags$div(
         "Data sourced from ",
         tags$a(href="https://www.kaggle.com/datasets/adamcuculich/county-socioeconomic-education-and-voting-data", 

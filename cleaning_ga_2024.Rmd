@@ -11,9 +11,9 @@ library(tidyverse)
 library(readxl)
 ```
 
-### Import data
+### Import vote data
 ```{r}
-total_data = read_excel("final/total_ga_results_2024.xlsx", sheet="County Results")
+total_data = read_excel("total_ga_results_2024.xlsx", sheet="County Results")
 ```
 
 ### Clean up data
@@ -45,6 +45,20 @@ ga_2024 = ga_2024%>%
 # drop extra rows and columns 
 ga_2024 = ga_2024%>%select(c(County,Party,`Vote Percentage`))%>%drop_na()
 ```
+
+### insert turnout data 
+```{r}
+# https://app.enhancedvoting.com/results/public/Georgia/elections/2024NovGen/voters
+# copy and pasting from above link into excel and exported as csv
+turnout = read.csv("ga_turnout_results_2024.csv")
+
+turnout = turnout%>%mutate(Turnout.Percentage = as.numeric(gsub("%","", Turnout.Percentage)))%>%
+  select(-c("Totals", "Ballots.Cast"))
+
+# merge with ga_2024
+ga_2024 = full_join(ga_2024, turnout, by="County")
+```
+
 
 ### export clean georgia data
 ```{r}
