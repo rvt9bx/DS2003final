@@ -1,5 +1,5 @@
 # DS2003final
-UVA DS 2003 (Communicating with Data) Final Project: US Election Data 2020 and 2020
+UVA DS 2003 (Communicating with Data) Final Project: US Voting Trends 2020 and 2024
 
 # Overview
 Code repository for final group project resulting in shiny apps exploring the relationship between socioeconomic trends and election results in 2020, and comparing Georgia's outcomes in 2020 vs 2024. 
