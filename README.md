@@ -11,6 +11,6 @@ US Voting Trends: Factors Influencing Turnout in 2020 [https://eleanorbyrd.shiny
 US Voting Trends: Comparison for Georgia, 2020 vs 2024 [https://eleanorbyrd.shinyapps.io/ga_voting_comparison/](https://eleanorbyrd.shinyapps.io/ga_voting_comparison/)
 
 # Data Sources
-[https://www.kaggle.com/datasets/adamcuculich/county-socioeconomic-education-and-voting-data ](url)
+[https://www.kaggle.com/datasets/adamcuculich/county-socioeconomic-education-and-voting-data ](https://www.kaggle.com/datasets/adamcuculich/county-socioeconomic-education-and-voting-data )
 
-[https://app.enhancedvoting.com/results/public/Georgia/elections/2024NovGen](url)
+[https://app.enhancedvoting.com/results/public/Georgia/elections/2024NovGen](https://app.enhancedvoting.com/results/public/Georgia/elections/2024NovGen)
