@@ -6,9 +6,9 @@ Code repository for final group project resulting in shiny apps exploring the re
 
 # Links to Shiny Apps
 
-US Voting Trends: Factors Influencing Turnout in 2020 [https://eleanorbyrd.shinyapps.io/socioeconomic_voting_2020/](url)
+US Voting Trends: Factors Influencing Turnout in 2020 [https://eleanorbyrd.shinyapps.io/socioeconomic_voting_2020/](https://eleanorbyrd.shinyapps.io/socioeconomic_voting_2020/)
 
-US Voting Trends: Comparison for Georgia, 2020 vs 2024 [https://eleanorbyrd.shinyapps.io/ga_voting_comparison/](url)
+US Voting Trends: Comparison for Georgia, 2020 vs 2024 [https://eleanorbyrd.shinyapps.io/ga_voting_comparison/](https://eleanorbyrd.shinyapps.io/ga_voting_comparison/)
 
 # Data Sources
 [https://www.kaggle.com/datasets/adamcuculich/county-socioeconomic-education-and-voting-data ](url)
